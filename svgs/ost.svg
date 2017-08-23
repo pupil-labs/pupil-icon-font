@@ -1,11 +1,11 @@
-<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
   <title>ost</title>
   <g data-name="capture - phase 1 copy 4" id="capture_-_phase_1_copy_4">
     <g data-name="right-tab copy 10" id="right-tab_copy_10">
       <g data-name="main menu copy 11" id="main_menu_copy_11">
         <g>
-          <rect fill="none" height="12" width="12"/>
-          <path d="M16.929,16.929H7.071V7.071h9.858ZM12,13.883h1.783V12.1H12Zm-1.783,0V12.1H8.434v3.566H12V13.883Zm0-1.783H12V10.317H10.217ZM21.559,6.265V2.441H17.735V3.636H6.265V2.441H2.441V6.265H3.636V17.735H2.441v3.824H6.265V20.364H17.735v1.195h3.824V17.735H20.364V6.265ZM18.93,17.735H17.735V18.93H6.265V17.735H5.07V6.265H6.265V5.07H17.735V6.265H18.93Z"/>
+          <rect fill="none" height="24" width="24"/>
+          <path d="M16.929,16.929H7.071V7.071h9.858ZM12,13.883h1.783V12.1H12Zm-1.783,0V12.1H8.434v3.566H12V13.883Zm0-1.783H12V10.317H10.217ZM21.559,6.265V2.441H17.735V3.636H6.265V2.441H2.441V6.265H3.636V17.735H2.441v3.824H6.265V20.364H17.735v1.195h3.824V17.735H20.364V6.265ZM18.93,17.735H17.735V18.93H6.265V17.735H5.07V6.265H6.265V5.07H17.735V6.265H18.93Z" transform="translate(3.6000000000000014 3.6000000000000014) scale(0.7)"/>
         </g>
       </g>
     </g>

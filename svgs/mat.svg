@@ -1,9 +1,9 @@
-<svg data-name="all icons" id="all_icons" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg data-name="all icons" height="24" id="all_icons" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
   <title>mat</title>
   <g data-name="Layer 437" id="Layer_437">
     <g>
-      <rect fill="none" height="12" width="12"/>
-      <path d="M17.762,9.6V6.238a.963.963,0,0,0-.96-.96H3.357a.963.963,0,0,0-.96.96V17.762a.963.963,0,0,0,.96.96H16.8a.963.963,0,0,0,.96-.96V14.4L21.6,18.242V5.758Zm-4.8,5.762v-2.4H7.2v2.4L3.837,12,7.2,8.639v2.4H12.96v-2.4L16.321,12Z"/>
+      <rect fill="none" height="24" width="24"/>
+      <path d="M17.762,9.6V6.238a.963.963,0,0,0-.96-.96H3.357a.963.963,0,0,0-.96.96V17.762a.963.963,0,0,0,.96.96H16.8a.963.963,0,0,0,.96-.96V14.4L21.6,18.242V5.758Zm-4.8,5.762v-2.4H7.2v2.4L3.837,12,7.2,8.639v2.4H12.96v-2.4L16.321,12Z" transform="translate(3.6000000000000014 3.6000000000000014) scale(0.7)"/>
     </g>
   </g>
 </svg>

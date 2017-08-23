@@ -1,9 +1,9 @@
-<svg data-name="all icons" id="all_icons" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg data-name="all icons" height="24" id="all_icons" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
   <title>vsp</title>
   <g data-name="Layer 437" id="Layer_437">
     <g>
-      <rect fill="none" height="12" width="12"/>
-      <path d="M16.09,7.91A5.763,5.763,0,0,0,12,6.212V12L7.91,16.09a5.784,5.784,0,1,0,8.18-8.18ZM12,2.354A9.646,9.646,0,1,0,21.646,12,9.65,9.65,0,0,0,12,2.354Zm0,17.364A7.717,7.717,0,1,1,19.717,12,7.715,7.715,0,0,1,12,19.717Z"/>
+      <rect fill="none" height="24" width="24"/>
+      <path d="M16.09,7.91A5.763,5.763,0,0,0,12,6.212V12L7.91,16.09a5.784,5.784,0,1,0,8.18-8.18ZM12,2.354A9.646,9.646,0,1,0,21.646,12,9.65,9.65,0,0,0,12,2.354Zm0,17.364A7.717,7.717,0,1,1,19.717,12,7.715,7.715,0,0,1,12,19.717Z" transform="translate(3.6000000000000014 3.6000000000000014) scale(0.7)"/>
     </g>
   </g>
 </svg>
