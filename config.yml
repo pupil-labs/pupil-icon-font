@@ -1,0 +1,130 @@
+---
+# This is configuration file for font builder and other support scripts.
+# Format is descriped below.
+#
+#
+# # metadata, to generate demo & fontello info dialogs
+# meta:
+#
+#  author: Daniel Buce
+#  homepage: http://...
+#  email: ...
+#  twitter: http://twitter.com/...
+#  dribble: http://dribbble.com/...
+#  license: SIL
+#  license_url: http://scripts.sil.org/OFL
+#
+#   css-prefix: "icon-"             # prefix for css-generated classes
+#   demo-columns: 4                 # used for html demo page generation
+#
+# # Font headers. All vars from here will be used as font
+# # params in fontforge http://fontforge.sourceforge.net/python.html
+# font:
+#
+#   version: "1.0"
+#
+#   # use !!!small!!! letters a-z, or Opera will fail under OS X
+#   # fontname will be also used as file name.
+#   fontname: myfont
+#
+#   fullname: MyFont
+#   familyname: Myfont
+#
+#   copyright: Copyright (C) 2012 by xxxxxxxx
+#
+#   ascent: 1638
+#   descent: 410
+#   weight: Regular
+#
+#
+# #
+# # Optional. You can apply global rescale + offset to all font glyphs.
+# # Param values ar 0..1, where 1 = 100%.
+# #
+# transform:
+#   baseline: 0.2                 # baseline for rescale symmetry. Default value
+#                                 # calculated from ascent/decsent
+#   rescale: 0.68                 # rescale glyphs and center around baseline
+#   offset: -0.1                  # shift up/down
+#
+# glyphs:
+#   - file: glyph1_file           # file name, without extention
+#     from: 0xNNN                 # Source code for remapper or merge tool
+#     code: 0xNNN                 # Symbol code 0x - hex
+#     css: icon-gpyph1-name       # For generated CSS
+#     search: [word1, word2]      # Search aliases (array). CSS name will be
+#                                 # included automatically
+#     src: first_font_alias       # alias to font for merge tool
+#                                 # list of aliases in src_fonts section
+#
+#     #
+#     # local transformations, only for this glyph (optional)
+#     #
+#     transform:                  # personal glyph transformation.
+#       rescale_rel               # *_rel - applyed after global.
+#       offset: 0.2               # without *_rel - override global
+#
+# #
+# # Fonts aliases used only in font merge tool
+# #
+# src_fonts:
+#   first_font_alias: "/absolute/path/to/first/font.ttf"
+#
+################################################################################
+#
+
+
+meta:
+  author: Nathakit Sae-Tan
+  homepage: http://pupil-labs.com
+  email: nat@pupil-labs.com
+  github: http://github.com/pupil-labs/pupil-icon-font
+  license: LGPL-3.0
+
+  css_prefix_text: "ic-"
+  columns: 4
+
+#transform:
+#  baseline: 0.5
+#  rescale: 1.053
+#  # offset: -0.05
+
+
+font:
+  version: "0.0.1"
+
+  # use !!!small!!! letters a-z, or Opera will fail under OS X
+  # fontname will be also used as file name.
+  fontname: pupil_icons
+
+  fullname: Pupil Icons
+  familyname: Pupil
+
+  # copyright: Copyright (C) 2016 by Dave Gandy
+
+  ascent: 850
+  descent: 150
+  weight: "Regular"
+
+
+glyphs:
+
+    # general settings
+  - name: gs
+    code: 0xE8B8
+
+    # plugin manager
+  - name: pm
+    code: 0xE8C0
+
+    # source
+  - name: s
+    code: 0xEC01
+
+    # active sources
+  - name: as
+    code: 0xE412
+
+    # active sources
+  - name: rec
+    code: 0xE04B
