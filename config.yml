@@ -81,13 +81,11 @@ meta:
   github: http://github.com/pupil-labs/pupil-icon-font
   license: LGPL-3.0
 
-  css_prefix_text: "ic-"
-  columns: 4
 
-#transform:
-#  baseline: 0.5
-#  rescale: 1.053
-#  # offset: -0.05
+# transform:
+ # baseline: 0.5
+ # rescale: .7
+ # offset: -0.05
 
 
 font:
@@ -101,10 +99,11 @@ font:
   familyname: Pupil
 
   # copyright: Copyright (C) 2016 by Dave Gandy
-
+  height: 1000
   ascent: 850
-  descent: 150
+  descent: -150
   weight: "Regular"
+  scale: 0.7
 
 
 glyphs:
@@ -124,6 +123,10 @@ glyphs:
     # active sources
   - name: as
     code: 0xE412
+
+    # active sources
+  - name: rec
+    code: 0xE04B
 
     # active sources
   - name: rec
