@@ -1,9 +1,1 @@
-<svg data-name="all icons" height="24" id="all_icons" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-  <title>vcl</title>
-  <g data-name="Layer 437" id="Layer_437">
-    <g>
-      <rect fill="none" height="24" width="24"/>
-      <path d="M12,2.46A9.54,9.54,0,1,1,2.46,12,9.54,9.54,0,0,1,12,2.46Z" transform="translate(3.6000000000000014 3.6000000000000014) scale(0.7)"/>
-    </g>
-  </g>
-</svg>
+<svg height="1000" viewBox="0 0 1000 1000" width="1000" xmlns="http://www.w3.org/2000/svg"><defs><style>.a{fill:none;}</style></defs><title>vcl</title><path d="M500,102.5c219.5332,0,397.5,177.96682,397.5,397.5S719.5332,897.5,500,897.5,102.5,719.5332,102.5,500,280.46678,102.5,500,102.5Z"/></svg>
