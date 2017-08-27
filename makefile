@@ -19,7 +19,7 @@ optimize:
 font:
 	@if test ! -d node_modules ; then \
 		echo "dependencies not found:" >&2 ; \
-		echo "  make dependencies" >&2 ; \
+		echo "  npm install" >&2 ; \
 		exit 128 ; \
 		fi
 
@@ -28,7 +28,7 @@ font:
 
 	@if test ! -d node_modules ; then \
 		echo "dependencies not found:" >&2 ; \
-		echo "  make dependencies" >&2 ; \
+		echo "  npm install" >&2 ; \
 		exit 128 ; \
 		fi
 
@@ -36,15 +36,4 @@ font:
 	@# ${BIN}/ttf2eot "$(output)$(FONT_NAME).ttf" "$(output)$(FONT_NAME).eot"
 	@# ${BIN}/ttf2woff "$(output)$(FONT_NAME).ttf" "$(output)$(FONT_NAME).woff"
 
-dependencies:
-	@if test ! `which npm` ; then \
-		echo "Node.JS and NPM are required." >&2 ; \
-		echo "  - Install Node.JS and NPM" >&2 ; \
-		exit 128 ; \
-		fi
-	@if test ! -d node_modules ; then \
-		echo "Installing dependencies..." ; \
-		npm i ; \
-		fi
-
-.PHONY: transform_svg font dist optimize dependencies
+.PHONY: transform_svg font dist optimize
