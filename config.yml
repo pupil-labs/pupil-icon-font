@@ -1,0 +1,177 @@
+---
+# This is configuration file for font builder and other support scripts.
+# Format is descriped below.
+#
+# # metadata, to generate demo & fontello info dialogs
+# meta:
+#
+#  author: Daniel Buce
+#  homepage: http://...
+#  email: ...
+#  license: SIL
+#  license_url: http://scripts.sil.org/OFL
+#
+# # Font headers. All vars from here will be used as font
+# # params in fontforge http://fontforge.sourceforge.net/python.html
+# font:
+#
+#   version: "1.0"
+#
+#   # use !!!small!!! letters a-z, or Opera will fail under OS X
+#   # fontname will be also used as file name.
+#
+#   fontname: myfont
+#   fullname: MyFont
+#   familyname: Myfont
+#
+#   height: 1000
+#   ascent: 850
+#   descent: -150
+#   weight: "Regular"
+#
+#   Adjust t
+#   scale: 0.7
+#
+#   copyright: Copyright (C) 2012 by xxxxxxxx
+#
+#
+# glyphs:
+#   - name: glyph_file            # file name, without extention
+#     code: 0xNNN                 # Symbol code 0x - hex
+#
+################################################################################
+#
+
+
+meta:
+  author: Nathakit Sae-Tan
+  homepage: http://pupil-labs.com
+  email: nat@pupil-labs.com
+  github: http://github.com/pupil-labs/pupil-icon-font
+  license: LGPL-3.0
+
+font:
+  version: "0.0.1"
+  # use !!!small!!! letters a-z, or Opera will fail under OS X
+  fontname: pupil_icons
+  fullname: Pupil Icons
+  familyname: Pupil
+
+  # copyright: Copyright (C) 2016 by Dave Gandy
+  height: 1000
+  ascent: 850
+  descent: -150
+  weight: "Regular"
+  # you can resize an SVG element by scaling it up or down 
+  scale: 0.7
+
+
+glyphs:
+
+    # general settings
+  - name: gs
+    code: 0xE8B8
+
+    # plugin manager
+  - name: pm
+    code: 0xE8C0
+
+    # active sources
+  - name: as
+    code: 0xE412
+
+    # recorder
+  - name: rec
+    code: 0xE04B
+
+    # groups
+  - name: g
+    code: 0xE886
+
+    # remote
+  - name: rm
+    code: 0xE307
+
+    # vis circle
+  - name: vcl
+    code: 0xE061
+
+    # vis cross
+  - name: vcr
+    code: 0xE1B7
+
+    # vis lightpoints
+  - name: vlp
+    code: 0xE3A5
+
+    # vis polyline
+  - name: vpl
+    code: 0xE922
+
+    # vis scan path
+  - name: vsp
+    code: 0xE422
+
+    # annotation player
+  - name: ap
+    code: 0xE866
+
+    # gaze position2d fixation detector
+  - name: 2dfd
+    code: 0xE3B4
+
+    # raw data exporter
+  - name: rde
+    code: 0xE873
+
+    # marker auto trim marks
+  - name: mat
+    code: 0xE41F
+
+    # offline calibration
+  - name: oc
+    code: 0xE39E
+
+    # source
+  - name: s
+    code: 0xEC01
+
+    # vis eye video overlay
+  - name: veo
+    code: 0xEC02
+
+    # vis fixation
+  - name: vf
+    code: 0xEC03
+
+    # vis watermark
+  - name: vwm
+    code: 0xEC04
+
+    # batch exporter
+  - name: be
+    code: 0xEC05
+
+    # manual gaze correction
+  - name: mgc
+    code: 0xEC06
+
+    # offline surface tracker
+  - name: ost
+    code: 0xEC07
+
+    # pupil angle 3d fixation detector
+  - name: 3dfd
+    code: 0xEC08
+
+    # video export launcher
+  - name: vel
+    code: 0xEC09
+
+    # log history
+  - name: lh
+    code: 0xEC10
+
+    # offline pupil detection
+  - name: opd
+    code: 0xEC11
