@@ -1,10 +1,7 @@
 # pupil-icon-font
 Icon font for Pupil software
 
-Using fontello toolchains to locally optimize and convert individual SVGs to TTF font
-
-- 
-- Uses `svg-font-create` and
+Using [fontello](https://github.com/fontello/) toolchains to locally optimize and convert individual SVGs to TTF font
 
 ## Installation
 
@@ -13,9 +10,9 @@ You need [node.js])(https://nodejs.org/en/download/) and `fontforge` installed f
 ### Debian Ubunbu
 Fontforge
 ```bash
-sudo add-apt-repository ppa:fontforge/fontforge;
+sudo add-apt-repository ppa:fontforge/fontforge
 sudo apt-get update
-sudo apt-get install fontforge;
+sudo apt-get install fontforge
 ```
 
 Dependencies
@@ -42,20 +39,20 @@ Diagram of repo hierarchy
 |-- font
 	`-- glyph svg and ttf file
 |-- dist
-	`-- temp file for transformed svg
+	`-- temp file for transformed svgs
 ```
 
 ## Development	
 
-Create fork and clone your repo locally.
+Fork and clone to work locally.
 
 ### New SVG icons 
 Add icons to `./svgs` folder,
-Edit config.yml and add your icon name and unicode there.
+Edit `config.yml` to specify your icon names and unicode mapping for each glyph.
 Make sure the icon name is the same as the svg icon file name.
 
 ### SVG requirements
-All svg icons must should be `1000x1000`.
+All svg icons must be `1000x1000` px.
 Svg path must be a compound path.
 Black and white, no colors.
 No fills.
