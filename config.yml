@@ -8,8 +8,6 @@
 #  author: Daniel Buce
 #  homepage: http://...
 #  email: ...
-#  twitter: http://twitter.com/...
-#  dribble: http://dribbble.com/...
 #  license: SIL
 #  license_url: http://scripts.sil.org/OFL
 #
@@ -21,10 +19,18 @@
 #
 #   # use !!!small!!! letters a-z, or Opera will fail under OS X
 #   # fontname will be also used as file name.
-#   fontname: myfont
 #
+#   fontname: myfont
 #   fullname: MyFont
 #   familyname: Myfont
+#
+#   height: 1000
+#   ascent: 850
+#   descent: -150
+#   weight: "Regular"
+#
+#   Adjust t
+#   scale: 0.7
 #
 #   copyright: Copyright (C) 2012 by xxxxxxxx
 #
@@ -47,7 +53,6 @@ meta:
 font:
   version: "0.0.1"
   # use !!!small!!! letters a-z, or Opera will fail under OS X
-  # fontname will be also used as file name.
   fontname: pupil_icons
   fullname: Pupil Icons
   familyname: Pupil
@@ -57,6 +62,7 @@ font:
   ascent: 850
   descent: -150
   weight: "Regular"
+  # you can resize an SVG element by scaling it up or down 
   scale: 0.7
 
 
