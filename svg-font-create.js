@@ -2,16 +2,15 @@
 
 'use strict';
 
-var fs        = require('fs');
-var path      = require('path');
-var _         = require('lodash');
-var yaml      = require('js-yaml');
-var DOMParser = require('xmldom').DOMParser;
-var fstools   = require('fs-tools');
-var execFile  = require('child_process').execFile;
-var ArgumentParser = require('argparse').ArgumentParser;
-var svgpath = require('svgpath');
-
+const fs        = require('fs');
+const path      = require('path');
+const _         = require('lodash');
+const yaml      = require('js-yaml');
+const DOMParser = require('xmldom').DOMParser;
+const fstools   = require('fs-tools');
+const execFile  = require('child_process').execFile;
+const ArgumentParser = require('argparse').ArgumentParser;
+const svgpath   = require('svgpath');
 
 function parseSvgImage(data, filename) {
 
@@ -34,13 +33,11 @@ function parseSvgImage(data, filename) {
 
   var path = svg.getElementsByTagName('path');
 
-  // console.log(path);
-  // console.log(path.length > 1)
   if (path.length > 1) {
-    throw 'Multiple paths not supported' + (filename ? ' (' + filename + ' ' : '');
+    throw 'Multiple paths not supported' + (filename ? ' -- ' + filename + ' ' : '');
   }
   if (path.length === 0) {
-    throw 'No path data fount' + (filename ? ' (' + filename + ' ' : '');
+    throw 'No path data fount' + (filename ? ' -- ' + filename + ' ' : '');
   }
 
   path = path[0];
@@ -61,7 +58,6 @@ function parseSvgImage(data, filename) {
   };
 }
 
-
 var svgImageTemplate = _.template(
     '<svg height="<%= height %>" width="<%= width %>" xmlns="http://www.w3.org/2000/svg">' +
     '<path d="<%= d %>"<% if (transform) { %> transform="<%= transform %>"<% } %>/>' +
@@ -81,13 +77,8 @@ var svgFontTemplate = _.template(
       ' font-weight="400"' +
       ' font-stretch="normal"' +
       ' units-per-em="<%= fontHeight %>"' +
-      //panose-1="2 0 5 3 0 0 0 0 0 0"
       ' ascent="<%= font.ascent %>"' +
       ' descent="<%= font.descent %>"' +
-      //bbox="-1.33333 -150.333 1296 850"
-      //underline-thickness="50"
-      //underline-position="-100"
-      //unicode-range="U+002B-1F6AB"
     ' />\n' +
 
     '<missing-glyph horiz-adv-x="<%= fontHeight %>" />\n' +
@@ -106,7 +97,6 @@ var svgFontTemplate = _.template(
     '</svg>'
   );
 
-
 var parser = new ArgumentParser({
   version: require('./package.json').version,
   addHelp: true,
@@ -121,7 +111,6 @@ var args = parser.parseArgs();
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
 var config, tmpDir;
 
 try {
@@ -131,9 +120,9 @@ try {
   process.exit(1);
 }
 
-//tmpDir = path.resolve('./tmp');
-tmpDir = fstools.tmpdir();
-fstools.mkdirSync(tmpDir);
+// tmpDir = path.resolve('./tmp');
+// tmpDir = fstools.tmpdir();
+// fstools.mkdirSync(tmpDir);
 
 var font = config.font;
 // fix descent sign
@@ -156,23 +145,23 @@ fstools.walkSync(args.input_dir, /[.]svg$/i, function (file) {
   y = glyph.height - x;
   z = y / 2;
 
-  var trans = 'translate(' + z + ' ' + z + ')' + ' scale(' + s + ')';
+  var trans = `translate(${z} ${z}) scale(${s})`;
 
   var transform_scale = svgpath(glyph.d)
-                      .transform(trans)
-                      .rel()
-                      .round(3)
-                      .toString();
+                          .transform(trans)
+                          .rel()
+                          .round(3)
+                          .toString();
 
   // y vertical mirror is necessary
   // SVG coordinate system is like OpenGL with y pointing coordinate downwards and cartesian coordinates poingitng upwards
-  var transform_mirror = ' translate(0 ' + (fontHeight / 2) + ') scale(1 -1) translate(0 ' + (-fontHeight / 2) + ')';
+  var transform_mirror = `translate(0 ${fontHeight / 2}) scale(1 -1) translate(0 -${fontHeight / 2})`;
 
   var transformed_all = svgpath(transform_scale)
-                      .transform(transform_mirror)
-                      .rel()
-                      .round(3)
-                      .toString();
+                          .transform(transform_mirror)
+                          .rel()
+                          .round(3)
+                          .toString();
 
   svgOut = svgImageTemplate({
     height : glyph.height,
@@ -246,5 +235,5 @@ execFile(
 
   fs.writeFileSync(args.output, svgOut, 'utf8');
 
-  fstools.removeSync(tmpDir);
+  // fstools.removeSync(tmpDir);
 });
