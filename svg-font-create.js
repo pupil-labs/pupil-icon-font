@@ -154,7 +154,7 @@ fstools.walkSync(args.input_dir, /[.]svg$/i, function (file) {
                           .toString();
 
   // y vertical mirror is necessary
-  // SVG coordinate system is like OpenGL with y pointing coordinate downwards and cartesian coordinates poingitng upwards
+  // SVG coordinate system is like OpenGL with y pointing downwards and cartesian coordinates pointing upwards
   var transform_mirror = `translate(0 ${fontHeight / 2}) scale(1 -1) translate(0 -${fontHeight / 2})`;
 
   var transformed_all = svgpath(transform_scale)
