@@ -18,7 +18,7 @@
   "homepage": "https://github.com/pupil-labs/pupil-icon-font#readme",
   "devDependencies": {
     "fs-tools": "^0.3.0",
-    "js-yaml": "^3.6.1",
+    "js-yaml": "^3.9.1",
     "svg2ttf": "^4.0.1",
     "svgo": "^0.6.6",
     "svgpath": "^2.2.1",
