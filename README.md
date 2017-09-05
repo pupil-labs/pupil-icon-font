@@ -29,12 +29,36 @@ sudo apt-get install fontforge
 npm install
 ```
 
-## Make `.ttf` font
+## Make tasks
 
-Run command to make ttf font
+### Make all tasks
 
 ```
 make
+```
+
+### Make `.ttf` font
+
+```
+make font
+```
+
+### Generate `.html` with icon font and glyphs
+
+```
+make index
+```
+
+### Transform SVGs
+
+```
+make transform_svg
+```
+
+### Optimize SVGs
+
+```
+make optimize
 ```
 
 ## Project structure
