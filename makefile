@@ -8,7 +8,12 @@ output_dir := $(join $(font_dir),$(FONT_NAME))
 
 # dist: transform_svg font
 
-dist: transform_svg font
+dist: index transform_svg font
+
+index:
+	@echo "Generating html"
+	node ./font-index.js
+
 transform_svg:
 	@echo "Transforming SVG"
 	@python3 svg.py
@@ -36,4 +41,4 @@ font:
 	@# ${BIN}/ttf2eot "$(output)$(FONT_NAME).ttf" "$(output)$(FONT_NAME).eot"
 	@# ${BIN}/ttf2woff "$(output)$(FONT_NAME).ttf" "$(output)$(FONT_NAME).woff"
 
-.PHONY: transform_svg font dist optimize
+.PHONY: index transform_svg font dist optimize

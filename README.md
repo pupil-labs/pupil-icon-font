@@ -3,6 +3,8 @@ Icon font for Pupil software
 
 Using [fontello](https://github.com/fontello/) toolchains to locally optimize and convert individual SVGs to TTF font
 
+Preview the icon font and mappings by opening `index.html` in your browser.
+
 ## Installation
 
 Install [node](https://nodejs.org/en/download/) and NPM. 
@@ -29,12 +31,36 @@ sudo apt-get install fontforge
 npm install
 ```
 
-## Make `.ttf` font
+## Make tasks
 
-Run command to make ttf font
+### Make all tasks
 
 ```
 make
+```
+
+### Make `.ttf` font
+
+```
+make font
+```
+
+### Generate `.html` with icon font and glyphs
+
+```
+make index
+```
+
+### Transform SVGs
+
+```
+make transform_svg
+```
+
+### Optimize SVGs
+
+```
+make optimize
 ```
 
 ## Project structure
