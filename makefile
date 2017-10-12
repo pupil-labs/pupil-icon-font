@@ -1,5 +1,5 @@
-FONTS			= pupil_icons
-FONT_DIR		= ./pupil_font
+FONTS			= svgs
+FONT_DIR		= ./font
 BIN  := ./node_modules/.bin
 
 help:
@@ -25,10 +25,10 @@ font:
 	rm -rf $(FONT_DIR)
 	mkdir -p $(FONT_DIR)
 	# build single font
-	./build_embedded_fonts.js \
-		-i ./src/$(FONTS) \
+	./svg-font-create.js \
+		-i ./$(FONTS) \
 		-o $(FONT_DIR)/pupil_icons.svg \
-		-s lib/embedded_fonts/server_config.js
+		-s ./server_config.js
 
 	# convert to other formats
 	./node_modules/.bin/svg2ttf "$(FONT_DIR)/pupil_icons.svg" "$(FONT_DIR)/pupil_icons.ttf"
