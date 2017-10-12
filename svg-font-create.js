@@ -1,68 +1,16 @@
 #!/usr/bin/env node
 
+
 'use strict';
 
-const fs        = require('fs');
-const path      = require('path');
-const _         = require('lodash');
-const yaml      = require('js-yaml');
-const DOMParser = require('xmldom').DOMParser;
-const fstools   = require('fs-tools');
-const execFile  = require('child_process').execFile;
-const ArgumentParser = require('argparse').ArgumentParser;
-const svgpath   = require('svgpath');
+var fs        = require('fs');
+var path      = require('path');
+var _         = require('lodash');
+var yaml      = require('js-yaml');
+var Domparser      = require('xmldom').DOMParser;
+var ArgumentParser = require('argparse').ArgumentParser;
+var SvgPath   = require('svgpath');
 
-function parseSvgImage(data, filename) {
-
-  var doc = (new DOMParser()).parseFromString(data, "application/xml");
-  var svg = doc.getElementsByTagName('svg')[0];
-
-  if (!svg.hasAttribute('height')) {
-    throw filename ? 'Missed height attribute in ' + filename : 'Missed height attribute';
-  }
-  if (!svg.hasAttribute('width')) {
-    throw filename ? 'Missed width attribute in ' + filename : 'Missed width attribute';
-  }
-
-  var height = svg.getAttribute('height');
-  var width  = svg.getAttribute('width');
-
-  // Silly strip 'px' at the end, if exists
-  height = parseFloat(height);
-  width  = parseFloat(width);
-
-  var path = svg.getElementsByTagName('path');
-
-  if (path.length > 1) {
-    throw 'Multiple paths not supported' + (filename ? ' -- ' + filename + ' ' : '');
-  }
-  if (path.length === 0) {
-    throw 'No path data fount' + (filename ? ' -- ' + filename + ' ' : '');
-  }
-
-  path = path[0];
-
-  var d = path.getAttribute('d');
-
-  var transform = '';
-
-  if (path.hasAttribute('transform')) {
-    transform = path.getAttribute('transform');
-  }
-
-  return {
-    height    : height,
-    width     : width,
-    d         : d,
-    transform : transform
-  };
-}
-
-var svgImageTemplate = _.template(
-    '<svg height="<%= height %>" width="<%= width %>" xmlns="http://www.w3.org/2000/svg">' +
-    '<path d="<%= d %>"<% if (transform) { %> transform="<%= transform %>"<% } %>/>' +
-    '</svg>'
-  );
 
 var svgFontTemplate = _.template(
     '<?xml version="1.0" standalone="no"?>\n' +
@@ -73,7 +21,7 @@ var svgFontTemplate = _.template(
     '<font id="<%= font.fontname %>" horiz-adv-x="<%= fontHeight %>" >\n' +
 
     '<font-face' +
-      ' font-family="<%= fontFamily %>"' +
+      ' font-family="font.familyname"' +
       ' font-weight="400"' +
       ' font-stretch="normal"' +
       ' units-per-em="<%= fontHeight %>"' +
@@ -97,143 +45,150 @@ var svgFontTemplate = _.template(
     '</svg>'
   );
 
+function parseSvgImage(data, filename) {
+
+  var doc = (new Domparser()).parseFromString(data, 'application/xml');
+  var svg = doc.getElementsByTagName('svg')[0];
+
+  if (!svg.hasAttribute('height')) {
+    throw filename ? 'Missed height attribute in ' + filename : 'Missed height attribute';
+  }
+  if (!svg.hasAttribute('width')) {
+    throw filename ? 'Missed width attribute in ' + filename : 'Missed width attribute';
+  }
+
+  var height = svg.getAttribute('height');
+  var width  = svg.getAttribute('width');
+
+  // Silly strip 'px' at the end, if exists
+  height = parseFloat(height);
+  width  = parseFloat(width);
+
+  var path = svg.getElementsByTagName('path');
+
+  if (path.length > 1) {
+    throw 'Multiple paths not supported' + (filename ? ' (' + filename + ' ' : '');
+  }
+  if (path.length === 0) {
+    throw 'No path data fount' + (filename ? ' (' + filename + ' ' : '');
+  }
+
+  path = path[0];
+
+  var d = path.getAttribute('d');
+
+  var transform = '';
+
+  if (path.hasAttribute('transform')) {
+    transform = path.getAttribute('transform');
+  }
+
+  return { height, width, d, transform };
+}
+
 var parser = new ArgumentParser({
-  version: require('./package.json').version,
   addHelp: true,
-  description: 'Create SVG font from separate images'
+  description: 'Fontello internal tool. Join multiple fonts to single one and create JS configs for processing'
 });
-parser.addArgument([ '-c', '--config' ], { help: 'Font config file', required: true });
-parser.addArgument([ '-i', '--input_dir' ], { help: 'Source images path', required: true });
+parser.addArgument([ '-i', '--input_fonts' ], { help: 'Input fonts paths', required: true, nargs : '+' });
 parser.addArgument([ '-o', '--output' ], { help: 'Output font file path', required: true });
-parser.addArgument([ '-s', '--svgo_config' ], { help: 'SVGO config path (use default if not set)' });
+parser.addArgument([ '-s', '--output_server' ], { help: 'Output server config path' });
 
 var args = parser.parseArgs();
 
+// server config, to build svg fonts
+// contains uid hash + svg paths, to generate font quickly
+var configServer = {
+  icons : {},
+  fonts : {},
+  metas : {}
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 
-var config, tmpDir;
+// Scan sources
 
-try {
-  config = yaml.load(fs.readFileSync(args.config, 'utf8'));
-} catch (e) {
-  console.error('Can\'t read config file ' + args.config);
-  process.exit(1);
-}
+// we don't need to loop - but could keep it in if we ever want to add more than one font
+_.forEach(args.input_fonts, function (fontDir) {
+  // Iterate each font
+  var cfg = yaml.load(fs.readFileSync(path.resolve('./config.yml'), 'utf8'));
 
-// tmpDir = path.resolve('./tmp');
-// tmpDir = fstools.tmpdir();
-// fstools.mkdirSync(tmpDir);
+  // push font info to server config
+  configServer.fonts[cfg.font.fontname] = _.clone(cfg.font, true);
+  configServer.metas[cfg.font.fontname] = _.clone(cfg.meta, true);
 
-var font = config.font;
-// fix descent sign
-if (font.descent > 0) { font.descent = -font.descent; }
+  // iterate glyphs
+  _.forEach(cfg.glyphs, function (glyph) {
 
-var fontHeight = font.ascent - font.descent;
+    // Cleanup fields list
+    var glyph_data = _.pick(glyph, ['codename', 'code']);
 
+    // Add more data for server config
+    glyph_data.fontname = cfg.font.fontname;
 
-console.log('Transforming coordinates');
+    glyph_data.svg = {};
 
-// Recalculate coordinates from image to font
-fstools.walkSync(args.input_dir, /[.]svg$/i, function (file) {
-  var transform = '', svgOut;
-  var glyph = parseSvgImage(fs.readFileSync(file, 'utf8'), file);
+    // load svg file & translate coordinates
+    var file_name = path.join('./svgs', glyph_data.codename + '.svg');
+    var svg = parseSvgImage(fs.readFileSync(file_name, 'utf8'), file_name);
 
-  // Scaling the svg
-  var x,y,z,s
-  s = font.scale;
-  x = glyph.height * s;
-  y = glyph.height - x;
-  z = y / 2;
+    // FIXME: Apply transform from svg file. Now we understand
+    // pure paths only.
+    var scale = cfg.font.scale
+    var vb = 1000
+    var x = vb * scale
+    var y = vb - x
+    var z = y / 2
 
-  var trans = `translate(${z} ${z}) scale(${s})`;
+    var trans_x = z
+    var trans_y = z + cfg.font.descent
 
-  var transform_scale = svgpath(glyph.d)
-                          .transform(trans)
-                          .rel()
-                          .round(3)
-                          .toString();
+    glyph_data.svg.width = +(svg.width).toFixed(1);
+    // !!key algo for transformation!!
+    glyph_data.svg.d = new SvgPath(svg.d)
+                            .scale(scale)
+                            .translate(trans_x, trans_y)
+                            .abs().round(1).rel()
+                            .toString();
 
-  // y vertical mirror is necessary
-  // SVG coordinate system is like OpenGL with y pointing downwards and cartesian coordinates pointing upwards
-  var transform_mirror = `translate(0 ${fontHeight / 2}) scale(1 -1) translate(0 -${fontHeight / 2})`;
-
-  var transformed_all = svgpath(transform_scale)
-                          .transform(transform_mirror)
-                          .rel()
-                          .round(3)
-                          .toString();
-
-  svgOut = svgImageTemplate({
-    height : glyph.height,
-    width  : glyph.width,
-    d      : transformed_all,
-    transform : ''
+    configServer.icons[glyph.fullname] = _.clone(glyph_data, true);
   });
-
-  var dir = './dist';
-
-  // make temp folder to transform the svgs before converting to ttf
-  fs.mkdir(dir, function(err) {
-      if (err) {
-          if (err.code == 'EEXIST'); // ignore the error if the folder already exists
-          else cb(err); // something else went wrong
-      }
-  });
-
-  fs.writeFileSync(path.join(dir, path.basename(file)), svgOut, 'utf8');
 });
 
-console.log('Optimizing images');
+// Write out configs
+fs.writeFileSync(args.output_server, 'module.exports = ' + JSON.stringify(configServer, null, 2), 'utf8');
 
-var svgoConfig = args.svgo_config ? path.resolve(args.svgo_config) : path.resolve(__dirname, 'svgo.yml');
+// Prepare SVG structures & write font file
+var font = {
+  fontname: 'pupil_icons',
+  familyname: 'pupil',
+  ascent: 850,
+  descent: -150
+};
 
-execFile(
-  path.resolve(process.cwd(), './node_modules/.bin/svgo'),
-  [ '-f', './dist', '--config', svgoConfig ],
-  function (err) {
+var glyphs = [];
 
-  if (err) {
-    console.error(err);
-    process.exit(1);
-  }
+_.forEach(configServer.icons, function (glyph) {
 
-  //create font output folder
-  fs.mkdir('./font', function(err) {
-      if (err) {
-          if (err.code == 'EEXIST'); // ignore the error if the folder already exists
-          else cb(err); // something else went wrong
-      }
+  glyphs.push({
+    height : glyph.svg.height,
+    width : glyph.svg.width,
+    d     : new SvgPath(glyph.svg.d)
+                  .scale(1, -1)
+                  .translate(0, font.ascent + font.descent)
+                  .abs().round(0).rel()
+                  .toString(),
+    name   : glyph.codename,
+    unicode : '&#x' + glyph.code.toString(16) + ';'
   });
-
-  console.log('Creating font file');
-
-  _.each(config.glyphs, function (glyph) {
-    var fileName = glyph.file || glyph.name + '.svg';
-    var svg = parseSvgImage(fs.readFileSync(path.resolve('./dist', fileName), 'utf8'), fileName);
-
-    glyph.width = svg.width;
-    glyph.d = svg.d;
-
-    // Fix for FontForge: need space between old and new polyline
-    glyph.d = glyph.d.replace(/zm/g, 'z m');
-
-    // 'unicode' attribute can be number in hex format, or ligature
-    if (glyph.code === +glyph.code) {
-      glyph.unicode = '&#x' + glyph.code.toString(16) + ';';
-    } else {
-      glyph.unicode = glyph.code;
-    }
-  });
-
-  var svgOut = svgFontTemplate({
-    font : font,
-    glyphs : config.glyphs,
-    metadata : font.copyright || "Generated by fontello.com",
-    fontHeight : font.ascent - font.descent,
-    fontFamily : font.familyname || "myfont"
-  });
-
-  fs.writeFileSync(args.output, svgOut, 'utf8');
-
-  // fstools.removeSync(tmpDir);
 });
+
+
+var svgOut = svgFontTemplate({
+  font,
+  glyphs,
+  metadata: 'internal font for pupil software',
+  fontHeight : font.ascent - font.descent
+});
+
+fs.writeFileSync(args.output, svgOut, 'utf8');
