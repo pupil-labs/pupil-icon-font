@@ -12,7 +12,7 @@ index:
 	node ./font-index.js
 
 optimize:
-	${BIN}/svgo --config `pwd`/dump.svgo.yml -f ./svgs
+	${BIN}/svgo -f ./svgs
 
 font:
 
