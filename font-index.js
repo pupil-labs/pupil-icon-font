@@ -23,16 +23,18 @@ var allglyphs = '';
 // template for each glyph
 for(var i = 0; i < glyphs.length; i++){
   var num = glyphs[i];
-  var name = glyphs[i].name;
+  var fullname = glyphs[i].fullname;
+  var codename = glyphs[i].codename;
   var byte_code = glyphs[i].code;
   var code = byte_code.toString(16);
   var human_hex = `0x${code}`;
   var hex = `&#x${code}`;
 
   allglyphs += `<div class="flex">
-        <i class="pupil-icon ${name}">${hex};</i>
-        <span class="i-name">Name: ${name}</span>
-        <span class="i-code">Code: ${human_hex}</span>
+        <i class="pupil-icon ${codename}">${hex};</i>
+        <span class="i-fullname">fullname: ${fullname}</span>
+        <span class="i-codename">codename: ${codename}</span>
+        <span class="i-code">code: ${human_hex}</span>
       </div>`
 }
 
@@ -75,9 +77,13 @@ const css = `.flex {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
           }
-          .i-name {
+          .i-fullname {
             margin-right: 1em;
-            width: 4.5vw;
+            width: 17.5vw;
+          }
+          .i-codename {
+            margin-right: 1em;
+            width: 10.5vw;
           }
           .i-code {
             margin-right: 1em;
