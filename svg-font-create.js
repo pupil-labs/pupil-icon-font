@@ -111,7 +111,7 @@ var configServer = {
 // we don't need to loop - but could keep it in if we ever want to add more than one font
 _.forEach(args.input_fonts, function (fontDir) {
   // Iterate each font
-  var cfg = yaml.load(fs.readFileSync(path.resolve(fontDir, 'config.yml'), 'utf8'));
+  var cfg = yaml.load(fs.readFileSync(path.resolve('./config.yml'), 'utf8'));
 
   // push font info to server config
   configServer.fonts[cfg.font.fontname] = _.clone(cfg.font, true);
@@ -129,7 +129,7 @@ _.forEach(args.input_fonts, function (fontDir) {
     glyph_data.svg = {};
 
     // load svg file & translate coordinates
-    var file_name = path.join(fontDir, 'src', 'svg', glyph_data.codename + '.svg');
+    var file_name = path.join('./svgs', glyph_data.codename + '.svg');
     var svg = parseSvgImage(fs.readFileSync(file_name, 'utf8'), file_name);
 
     // FIXME: Apply transform from svg file. Now we understand
