@@ -5,6 +5,7 @@ BIN  := ./node_modules/.bin
 help:
 	echo "make help        - Print this help"
 	echo "make index       - Generate html font index"
+	echo "make optimize    - optimize src svgs"
 	echo "make font        - Rebuild embedded fonts"
 
 index:
