@@ -33,7 +33,7 @@ var svgFontTemplate = _.template(
 
     '<% _.forEach(glyphs, function(glyph) { %>' +
       '<glyph' +
-        ' glyph-name="<%= glyph.css %>"' +
+        ' glyph-name="<%= glyph.name %>"' +
         ' unicode="<%= glyph.unicode %>"' +
         ' d="<%= glyph.d %>"' +
         ' horiz-adv-x="<%= glyph.width %>"' +
@@ -99,7 +99,7 @@ var args = parser.parseArgs();
 // server config, to build svg fonts
 // contains uid hash + svg paths, to generate font quickly
 var configServer = {
-  icons  : {},
+  icons : {},
   fonts : {},
   metas : {}
 };
@@ -178,10 +178,11 @@ _.forEach(configServer.icons, function (glyph) {
                   .translate(0, font.ascent + font.descent)
                   .abs().round(0).rel()
                   .toString(),
-    name   : glyph.name,
+    name   : glyph.codename,
     unicode : '&#x' + glyph.code.toString(16) + ';'
   });
 });
+
 
 var svgOut = svgFontTemplate({
   font,
