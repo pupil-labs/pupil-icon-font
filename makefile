@@ -2,6 +2,8 @@ FONTS			= svgs
 FONT_DIR		= ./font
 BIN  := ./node_modules/.bin
 
+all: index font
+
 help:
 	echo "make help        - Print this help"
 	echo "make index       - Generate html font index"
@@ -9,8 +11,8 @@ help:
 	echo "make font        - Rebuild embedded fonts"
 
 index:
-	echo "Generating html"
 	node ./font-index.js
+	echo "Icons indexed"
 
 optimize:
 	${BIN}/svgo -f ./svgs
@@ -33,10 +35,11 @@ font:
 
 	# convert to other formats
 	./node_modules/.bin/svg2ttf "$(FONT_DIR)/pupil_icons.svg" "$(FONT_DIR)/pupil_icons.ttf"
+	echo "Icon font created"
 
 	# convert ttf to webfonts -> woff /woff2
 	# ./node_modules/.bin/ttf2woff "$(FONT_DIR)/pupil_icons.ttf" "$(FONT_DIR)/pupil_icons.woff"
 	# cat "$(FONT_DIR)/pupil_icons.ttf" | ./node_modules/.bin/ttf2woff2 >> "$(FONT_DIR)/pupil_icons.woff2"
 
-.PHONY: help font index optimize
-.SILENT: help font index optimize
+.PHONY: all help font index optimize
+.SILENT: all help font index optimize
