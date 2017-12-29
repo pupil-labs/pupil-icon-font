@@ -192,13 +192,13 @@ glyphs:
     codename: ost
     code: 0xEC09
 
-  - fullname: gaze position 2d fixation detector
-    codename: fd2d
-    code: 0xEC10
+  # - fullname: gaze position 2d fixation detector
+  #   codename: fd2d
+  #   code: 0xEC10
 
-  - fullname: pupil angle 3d fixation detector
-    codename: fd3d
-    code: 0xEC11
+  # - fullname: pupil angle 3d fixation detector
+  #   codename: fd3d
+  #   code: 0xEC11
 
   - fullname: pupil detector 2d
     codename: pd2d
