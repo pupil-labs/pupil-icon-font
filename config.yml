@@ -62,7 +62,7 @@ font:
   ascent: 850
   descent: -150
   weight: Normal
-  scale: 1
+  scale: .7
 
 glyphs:
 
@@ -145,16 +145,17 @@ glyphs:
 
   - fullname: download
     codename: d
-    code: 0xE2C4
+    code: 0xE2C5
 
   - fullname: blink detection
     codename: bd
     code: 0xE81A
 
+
     # custom icons
   - fullname: saccade
     codename: sc
-    code: 0xEC00
+    code: 0xe8f5
 
   - fullname: source
     codename: s
@@ -172,70 +173,70 @@ glyphs:
     codename: vwm
     code: 0xEC04
 
-  - fullname: vis accuracy
-    codename: vac
-    code: 0xEC05
-
-  - fullname: vis cross
-    codename: vcr
-    code: 0xEC06
-
   - fullname: batch exporter
     codename: be
+    code: 0xEC05
+
+  - fullname: camera intrinsics estimation
+    codename: cie
+    code: 0xEC06
+
+  - fullname: offline surface tracker
+    codename: ost
     code: 0xEC07
 
   - fullname: manual gaze correction
     codename: mgc
     code: 0xEC08
 
-  - fullname: offline surface tracker
-    codename: ost
-    code: 0xEC09
-
-  # - fullname: gaze position 2d fixation detector
-  #   codename: fd2d
-  #   code: 0xEC10
-
-  # - fullname: pupil angle 3d fixation detector
-  #   codename: fd3d
-  #   code: 0xEC11
-
-  - fullname: pupil detector 2d
-    codename: pd2d
-    code: 0xEC12
-
-  - fullname: pupil detector 3d
-    codename: pd3d
-    code: 0xEC13
-
   - fullname: video export launcher
     codename: vel
-    code: 0xEC14
-
+    code: 0xEC09
+    
   - fullname: log history
     codename: lh
-    code: 0xEC15
+    code: 0xEC10
+
+  - fullname: vis accuracy
+    codename: vac
+    code: 0xEC11
 
   - fullname: offline pupil detection
     codename: opd
-    code: 0xEC16
+    code: 0xEC12
 
+  - fullname: vis cross
+    codename: vcr
+    code: 0xec13
+    
   - fullname: offline calibration
     codename: c
-    code: 0xEC17
+    code: 0xEC14
 
   - fullname: time sync
     codename: ts
-    code: 0xEC18
+    code: 0xEC15
 
   - fullname: Remote recorder
     codename: rr
-    code: 0xEC19
+    code: 0xec16
 
   - fullname: frame publisher
     codename: fr
-    code: 0xEC20
+    code: 0xEC17
+
+  - fullname: pupil detector 2d
+    codename: pd2d
+    code: 0xEC18
+
+  - fullname: pupil detector 3d
+    codename: pd3d
+    code: 0xEC19
 
   - fullname: gaze mapper
     codename: gm
+    code: 0xEC20
+
+  - fullname: hololens relay
+    codename: hlr
     code: 0xEC21
