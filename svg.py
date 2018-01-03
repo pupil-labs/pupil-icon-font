@@ -1,7 +1,6 @@
 import xml.dom.minidom as minidom
 import os
 import glob
-import re
 
 # modify width and height as desired
 
