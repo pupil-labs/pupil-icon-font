@@ -151,6 +151,14 @@ glyphs:
     codename: bd
     code: 0xE81A
 
+  - fullname: pause
+    codename: ps
+    code: 0xE034
+
+  - fullname: skip previous
+    codename: sp
+    code: 0xE045
+
 
     # custom icons
   - fullname: saccade
