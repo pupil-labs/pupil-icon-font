@@ -159,6 +159,10 @@ glyphs:
     codename: sp
     code: 0xE045
 
+  - fullname: audio playback
+    codename: apb
+    code: 0xE050
+
 
     # custom icons
   - fullname: saccade
