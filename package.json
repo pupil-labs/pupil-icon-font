@@ -1,6 +1,6 @@
 {
   "name": "pupil-icon-font",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Icon font for Pupil Software",
   "main": "index.js",
   "scripts": {
