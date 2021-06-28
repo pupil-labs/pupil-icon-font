@@ -42,7 +42,6 @@
 ################################################################################
 #
 
-
 meta:
   author: Nathakit Sae-Tan
   homepage: http://pupil-labs.com
@@ -65,8 +64,7 @@ font:
   scale: .7
 
 glyphs:
-
-    # material icons
+  # material icons
   - fullname: general settings
     codename: gs
     code: 0xE8B8
@@ -163,7 +161,6 @@ glyphs:
     codename: apb
     code: 0xE050
 
-
     # custom icons
   - fullname: saccade
     codename: sc
@@ -204,7 +201,7 @@ glyphs:
   - fullname: video export launcher
     codename: vel
     code: 0xEC09
-    
+
   - fullname: log history
     codename: lh
     code: 0xEC10
@@ -220,7 +217,7 @@ glyphs:
   - fullname: vis cross
     codename: vcr
     code: 0xec13
-    
+
   - fullname: offline calibration
     codename: c
     code: 0xEC14
@@ -252,3 +249,7 @@ glyphs:
   - fullname: hololens relay
     codename: hlr
     code: 0xEC21
+
+  - fullname: imu timeline
+    codename: imu_timeline
+    code: 0xEC22
