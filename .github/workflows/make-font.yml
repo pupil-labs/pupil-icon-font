@@ -17,7 +17,7 @@ jobs:
       - name: Display changes
         run: git status
       - name: Add & Commit
-        # if: github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true
         uses: EndBug/add-and-commit@v5
         with:
           push: False
@@ -25,9 +25,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Bump version
+        if: github.event.pull_request.merged == true
         run: npm version patch
       - name: Push changes
+        if: github.event.pull_request.merged == true
         uses: ad-m/github-push-action@master
         with:
           tags: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Trigger pyglui font update
+        if: github.event.pull_request.merged == true
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: pupil-labs/pyglui
+          event-type: pyglui-update-font
