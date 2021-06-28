@@ -1,0 +1,33 @@
+name: Make font
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  make_all:
+    name: Make font
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build font
+        run: make all
+      - name: Display changes
+        run: git status
+      - name: Add & Commit
+        # if: github.event.pull_request.merged == true
+        uses: EndBug/add-and-commit@v5
+        with:
+          push: False
+          message: "Update font-file"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Bump version
+        run: npm version patch
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          tags: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
