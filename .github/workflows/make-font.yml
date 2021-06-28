@@ -2,6 +2,7 @@ name: Make font
 on:
   pull_request:
     branches: [master]
+    types: [opened, synchronize, reopened, closed]
 
 jobs:
   make_all:
@@ -9,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: master
       - uses: actions/setup-node@v2
       - name: Install dependencies
         run: npm install
