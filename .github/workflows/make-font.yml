@@ -25,8 +25,11 @@ jobs:
         with:
           push: False
           message: "Update font-file"
+          branch: master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate current branch
+        run: git branch --show-current
       - name: Bump version
         if: github.event.pull_request.merged == true
         run: npm version patch
@@ -34,8 +37,8 @@ jobs:
         if: github.event.pull_request.merged == true
         uses: ad-m/github-push-action@master
         with:
-          tags: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
       - name: Trigger pyglui font update
         if: github.event.pull_request.merged == true
         uses: peter-evans/repository-dispatch@v1
